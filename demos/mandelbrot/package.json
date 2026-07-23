@@ -1,0 +1,17 @@
+{
+  "name": "@rm-wasm/demo-mandelbrot",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "rm-wasm": "workspace:*",
+    "wabt": "^1.0.39"
+  },
+  "devDependencies": {
+    "vite": "^6.4.3"
+  }
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mandelbrot — rm-wasm</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #111; color: #eee; font-family: monospace; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+    .container { text-align: center; }
+    canvas { border: 1px solid #333; image-rendering: pixelated; width: 800px; height: 600px; touch-action: none; }
+    .controls { margin-top: 8px; display: flex; gap: 12px; justify-content: center; align-items: center; }
+    .controls label { display: flex; align-items: center; gap: 6px; font-size: 13px; }
+    .controls input { width: 100px; }
+    .info { margin-top: 4px; font-size: 12px; color: #888; }
+    .help { margin-top: 2px; font-size: 11px; color: #555; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <canvas id="c" width="800" height="600"></canvas>
+    <div class="controls">
+      <label>Iterations <input id="iter" type="range" min="16" max="4096" value="256" step="8" /></label>
+      <button id="precisionBtn">High Precision: OFF</button>
+    </div>
+    <div class="info" id="status">Ready</div>
+    <div class="help">Scroll wheel to zoom · Drag to pan</div>
+  </div>
+  <script type="module" src="/src/runner.ts"></script>
+</body>
+</html>
