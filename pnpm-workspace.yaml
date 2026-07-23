@@ -1,4 +1,6 @@
 packages:
   - .
   - demos/*
+allowBuilds:
+  esbuild: true
 onlyBuiltDependencies: '["esbuild"]'
