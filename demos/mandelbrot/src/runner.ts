@@ -130,37 +130,103 @@ canvas.addEventListener("wheel", (e) => {
 
 let isPanning = false;
 let panStart: { panX: number; panY: number; px: number; py: number } | null = null;
+const activePointers = new Map<number, { clientX: number; clientY: number }>();
+let lastPinchDist = 0;
+let isPinching = false;
 
 canvas.addEventListener("pointerdown", (e) => {
-  isPanning = true;
-  canvas.setPointerCapture(e.pointerId);
-  panStart = { panX, panY, px: e.clientX, py: e.clientY };
+  activePointers.set(e.pointerId, { clientX: e.clientX, clientY: e.clientY });
+
+  if (activePointers.size === 1) {
+    isPanning = true;
+    isPinching = false;
+    canvas.setPointerCapture(e.pointerId);
+    panStart = { panX, panY, px: e.clientX, py: e.clientY };
+  } else if (activePointers.size === 2) {
+    isPanning = false;
+    isPinching = true;
+    panStart = null;
+    const pointers = [...activePointers.values()];
+    lastPinchDist = Math.hypot(
+      pointers[0].clientX - pointers[1].clientX,
+      pointers[0].clientY - pointers[1].clientY,
+    );
+  }
 });
 
 canvas.addEventListener("pointermove", (e) => {
-  if (!isPanning || !panStart) return;
-  const rect = canvas.getBoundingClientRect();
-  const scaleX = WIDTH / rect.width;
-  const scaleY = HEIGHT / rect.height;
-  const pixelScale = zoom / Math.min(WIDTH, HEIGHT);
+  if (!activePointers.has(e.pointerId)) return;
 
-  const dx = (e.clientX - panStart.px) * scaleX;
-  const dy = (e.clientY - panStart.py) * scaleY;
+  activePointers.set(e.pointerId, { clientX: e.clientX, clientY: e.clientY });
 
-  panX = panStart.panX - dx * pixelScale;
-  panY = panStart.panY - dy * pixelScale;
+  if (isPinching && activePointers.size === 2) {
+    const pointers = [...activePointers.values()];
+    const dist = Math.hypot(
+      pointers[0].clientX - pointers[1].clientX,
+      pointers[0].clientY - pointers[1].clientY,
+    );
 
-  render();
+    if (lastPinchDist > 0) {
+      const centerX = (pointers[0].clientX + pointers[1].clientX) / 2;
+      const centerY = (pointers[0].clientY + pointers[1].clientY) / 2;
+
+      const rect = canvas.getBoundingClientRect();
+      const cx = (centerX - rect.left) * (WIDTH / rect.width);
+      const cy = (centerY - rect.top) * (HEIGHT / rect.height);
+
+      const minWH = Math.min(WIDTH, HEIGHT);
+      const pixelScale = zoom / minWH;
+
+      const mX = panX + (cx - WIDTH / 2) * pixelScale;
+      const mY = panY + (cy - HEIGHT / 2) * pixelScale;
+
+      zoom *= lastPinchDist / dist;
+      const newPixelScale = zoom / minWH;
+
+      panX = mX - (cx - WIDTH / 2) * newPixelScale;
+      panY = mY - (cy - HEIGHT / 2) * newPixelScale;
+
+      render();
+    }
+
+    lastPinchDist = dist;
+    return;
+  }
+
+  if (isPanning && panStart) {
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = WIDTH / rect.width;
+    const scaleY = HEIGHT / rect.height;
+    const pixelScale = zoom / Math.min(WIDTH, HEIGHT);
+
+    const dx = (e.clientX - panStart.px) * scaleX;
+    const dy = (e.clientY - panStart.py) * scaleY;
+
+    panX = panStart.panX - dx * pixelScale;
+    panY = panStart.panY - dy * pixelScale;
+
+    render();
+  }
 });
 
 canvas.addEventListener("pointerup", (e) => {
-  isPanning = false;
-  panStart = null;
+  activePointers.delete(e.pointerId);
+  if (activePointers.size < 2) {
+    lastPinchDist = 0;
+    isPinching = false;
+  }
+  if (activePointers.size === 0) {
+    isPanning = false;
+    panStart = null;
+  }
   canvas.releasePointerCapture(e.pointerId);
 });
 
 canvas.addEventListener("pointercancel", () => {
+  activePointers.clear();
+  lastPinchDist = 0;
   isPanning = false;
+  isPinching = false;
   panStart = null;
 });
 
