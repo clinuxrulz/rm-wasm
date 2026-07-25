@@ -392,8 +392,16 @@ export function While(cond: I32Like, body: () => void): void {
 export function asm(wat: string, ...interpolations: Node[]): void {
   assertBlockScope("asm", (scope) => { scope.push(node({ _t: "void", type: "asm", value: { wat, interpolations } })); });
 }
-export function asmExpr(wat: string, ...interpolations: Node[]): Node {
-  return node({ _t: "void", type: "asm_expr", value: { wat, interpolations } }) as Node;
+export function asmExpr(wat: string, ...rest: any[]): Node {
+  let type = "void";
+  let interpolations: Node[] = [];
+  if (rest.length > 0 && typeof rest[0] === "string") {
+    type = rest[0];
+    interpolations = rest.slice(1);
+  } else {
+    interpolations = rest;
+  }
+  return node({ _t: type, type: "asm_expr", value: { wat, interpolations } }) as Node;
 }
 
 // === Raw memory access ===
