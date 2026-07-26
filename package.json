@@ -3,15 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "main": "./src/wasm.ts",
-  "types": "./src/wasm.ts",
+  "main": "./dist/wasm.js",
+  "types": "./dist/wasm.d.ts",
   "exports": {
     ".": {
-      "import": "./src/wasm.ts",
-      "types": "./src/wasm.ts"
+      "import": "./dist/wasm.js",
+      "types": "./dist/wasm.d.ts"
     }
   },
+  "files": ["dist"],
   "scripts": {
+    "build": "tsc -p tsconfig.build.json",
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit"
