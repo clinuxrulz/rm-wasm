@@ -1,7 +1,7 @@
 # rm-wasm
 
 [![npm](https://img.shields.io/npm/v/@random-mesh/rm-wasm.svg)](https://www.npmjs.com/package/@random-mesh/rm-wasm)
-[![GitHub](https://img.shields.io/badge/GitHub-anomalyco/rm--wasm-blue.svg)](https://github.com/clinuxrulz/rm-wasm)
+[![GitHub](https://img.shields.io/badge/GitHub-clinuxrulz/rm--wasm-blue.svg)](https://github.com/clinuxrulz/rm-wasm)
 
 A C-like TypeScript DSL that compiles to WAT (WebAssembly Text Format). Follows the same node-graph DAG architecture as [RMSL](https://github.com/anomalyco/rmsl).
 
