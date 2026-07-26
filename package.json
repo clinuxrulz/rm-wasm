@@ -1,6 +1,6 @@
 {
   "name": "@random-mesh/rm-wasm",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "main": "./dist/wasm.js",
   "types": "./dist/wasm.d.ts",
@@ -10,7 +10,9 @@
       "types": "./dist/wasm.d.ts"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "test": "vitest run",
@@ -18,7 +20,9 @@
     "typecheck": "tsc --noEmit"
   },
   "pnpm": {
-    "onlyBuiltDependencies": ["esbuild"]
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
   },
   "keywords": [
     "webassembly",
