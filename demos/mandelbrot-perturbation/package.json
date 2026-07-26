@@ -8,7 +8,7 @@
     "build": "vite build"
   },
   "dependencies": {
-    "rm-wasm": "workspace:*",
+    "@random-mesh/rm-wasm": "workspace:*",
     "wabt": "^1.0.39"
   },
   "devDependencies": {

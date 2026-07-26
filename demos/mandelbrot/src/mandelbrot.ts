@@ -1,7 +1,7 @@
 import {
   Fn, While, If, i32, i64, f64, Break,
   clearRegistry, compileWAT, node, asm,
-} from "rm-wasm";
+} from "@random-mesh/rm-wasm";
 
 const SPLIT = 134217729;
 const LN2 = Math.LN2;
