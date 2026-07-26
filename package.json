@@ -1,7 +1,6 @@
 {
   "name": "@random-mesh/rm-wasm",
   "version": "0.1.0",
-  "private": true,
   "type": "module",
   "main": "./dist/wasm.js",
   "types": "./dist/wasm.d.ts",
