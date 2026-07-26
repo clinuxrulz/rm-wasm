@@ -19,6 +19,26 @@
   "pnpm": {
     "onlyBuiltDependencies": ["esbuild"]
   },
+  "keywords": [
+    "webassembly",
+    "wasm",
+    "wat",
+    "dsl",
+    "typescript",
+    "compiler",
+    "ast",
+    "node-graph",
+    "dag"
+  ],
+  "homepage": "https://github.com/clinuxrulz/rm-wasm#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/clinuxrulz/rm-wasm.git"
+  },
+  "bugs": {
+    "url": "https://github.com/clinuxrulz/rm-wasm/issues"
+  },
+  "license": "MIT",
   "devDependencies": {
     "typescript": "^5.8.0",
     "vitest": "^3.1.0"

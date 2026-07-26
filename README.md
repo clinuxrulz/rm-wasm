@@ -1,5 +1,8 @@
 # rm-wasm
 
+[![npm](https://img.shields.io/npm/v/@random-mesh/rm-wasm.svg)](https://www.npmjs.com/package/@random-mesh/rm-wasm)
+[![GitHub](https://img.shields.io/badge/GitHub-anomalyco/rm--wasm-blue.svg)](https://github.com/clinuxrulz/rm-wasm)
+
 A C-like TypeScript DSL that compiles to WAT (WebAssembly Text Format). Follows the same node-graph DAG architecture as [RMSL](https://github.com/anomalyco/rmsl).
 
 ## Quick start
@@ -34,13 +37,13 @@ console.log(wat);
 
 ## Documentation
 
-- [API Reference](docs/api.md)
-- [Structs & Memory](docs/structs.md)
-- [WAT Output](docs/wat-output.md)
+- [API Reference](https://github.com/clinuxrulz/rm-wasm/blob/main/docs/api.md)
+- [Structs & Memory](https://github.com/clinuxrulz/rm-wasm/blob/main/docs/structs.md)
+- [WAT Output](https://github.com/clinuxrulz/rm-wasm/blob/main/docs/wat-output.md)
 
 ## Demos
 
-- [Mandelbrot Set](demos/mandelbrot/) — renders the Mandelbrot fractal fully compiled to WebAssembly
+- [Mandelbrot Set](https://github.com/clinuxrulz/rm-wasm/blob/main/demos/mandelbrot/) — renders the Mandelbrot fractal fully compiled to WebAssembly
 
 ## Scripts
 
